@@ -1,13 +1,13 @@
 # Restaurant Manager Module
 
-This Restaurant Manager module provides functionalities to manage restaurant data. The module allows users to add, update, delete, search for, and retrieve details of restaurants within a simulated database.
+This menu Manager module provides functionalities to manage menu data. The module allows users to add menu item, add menu item to order , remove menu item from order, clear the order, and calculate total order cost.
 
 ## Setting up the Node Module
 
 1. Clone the repository to your local directory.
 2. Create a new file named app.js and insert the code below:
 ```
-const restaurants = require("./Calbert_Restaurants.js");
+const restaurants =  require('./food_menu.js'));
 ```
 3. To run the module, open a new terminal and enter the following command:
 ```
@@ -16,120 +16,92 @@ node app.js
 
 ## How to Use the Functions
 
-### 'addRestaurant(name, cuisine, location, rating)'
+### 'restaurantManager.addFoodItem(name, price)'
 
-This function allows the user to add a new restaurant to the database. The required parameters are:
+This function allows the user to add a food to the database. The required parameters are:
 
-- `name`: The name of the restaurant.
-- `cuisine`: The type of cuisine the restaurant serves.
-- `location`: The location of the restaurant.
-- `rating`: The rating of the restaurant.
+- `name`: The name of the item.
+- `price`: The price of item.
 
-Example:
-```
-restaurants.addRestaurant("Taco Town", "Mexican", "Austin", 4.2);
-```
-
-### 'displayRestaurants()'
-
-This function displays all restaurants in the database.
 
 Example:
 ```
-displayRestaurants();
+restaurantManager.addFoodItem("Pizza", 10.99);
 ```
 
-### 'searchByCuisine(cuisine)'
 
-This function takes in one parameter, cuisine, allowing the user to search for restaurants serving a specific type of cuisine.
+
+### 'restaurantManager.addFoodToOrder'
+
+This function uses 2 parameters the food id and the food quantity allowing the user to decide the food item and quantity
 
 Example:
 ```
-restaurants.searchByCuisine("Indian");
+restaurantManager.addFoodToOrder(1, 2); //addition of 2 fries
 ```
 
-### 'searchByLocation(location)'
+### 'restaurantManager.removeFoodFromOrder'
 
-This function takes in one parameter, location, allowing the user to search for restaurants in a specific location.
+This function takes in one parameter, ID which allows the user to remove items/item from the order
 
 Example:
 ```
-restaurants.searchByLocation("Los Angeles");
+restaurantManager.removeFoodFromOrder(2); // Remove Burger
 ```
 
-### 'updateRating(name, newRating)'
 
-This function takes in two parameters:
+### 'restaurantManager.clearOrder();'
 
-- `name`: The name of the restaurant whose rating needs to be updated.
-- `newRating`: The new rating for the restaurant.
+This function removes all items from  the order
 
 Example:
 ```
-restaurants.updateRating("Sushi Central", 3.7);
+restaurantManager.clearOrder(); // Output: Order cleared.
 ```
 
-### 'getTopRatedRestaurants()'
 
-This function retrieves and displays all restaurants with a rating of 4.5 or higher.
+### 'restaurantManager.calculateTotal(); '
+
+For each item, calculate finds the corresponding food item in the foodDatabase using  ID.
+It calculates the cost of each item by multiplying its price by its quantity. 
+It then accumulates the total cost by summing up the costs of all items in the order.
 
 Example:
 ```
-restaurants.getTopRatedRestaurants();
+// Recalculate total order cost
+restaurantManager.calculateTotal(); 
 ```
 
-### 'getRestaurantsByRating(minRating, maxRating)'
 
-This function takes in two parameters:
-
-- `minRating`: The minimum rating of the restaurants to be retrieved.
-- `maxRating`: The maximum rating of the restaurants to be retrieved.
-
-Example:
-```
-restaurants.getRestaurantsByRating(4.0, 4.5);
-```
-
-### 'deleteRestaurant(name)'
-
-This function takes in one parameter, name, allowing the user to delete a restaurant by its name.
-
-Example:
-```
-restaurants.deleteRestaurant("Sushi Central");
-```
 
 ## Example
 
 ```
-const restaurants = require("./Calbert_Restaurants.js");
+const restaurantManager = require('./food_menu.js');
 
-// Adds restaurants to the database
-restaurants.addRestaurant("Taco Town", "Mexican", "Austin", 4.2);
-restaurants.addRestaurant("Burger Barn", "American", "Chicago", 4.3);
+// Add food items to the database
+restaurantManager.addFoodItem("Pizza", 10.99);
+restaurantManager.addFoodItem("Burger", 8.49);
+restaurantManager.addFoodItem("Salad", 6.00);
 
-// Displays all restaurants in the database
-restaurants.displayRestaurants();
+// Calculate total order cost
+restaurantManager.calculateTotal();
 
-// Displays all restaurants that serve the specified cuisine
-restaurants.searchByCuisine("Indian");
-restaurants.searchByCuisine("Korean");
+// Add items to the order
+restaurantManager.addFoodToOrder(1, 2); //addition of 2 fries
+restaurantManager.addFoodToOrder(2, 1); //addition of 1 Burger
 
-// Displays all restaurants located in the specified location
-restaurants.searchByLocation("Los Angeles");
-restaurants.searchByLocation("Texas");
 
-// Updates the specified restaurants rating
-restaurants.updateRating("Sushi Central", 3.7);
-restaurants.updateRating("Krusty Krab", 5.0);
 
-// Displays all restaurants with a rating >= 4.5
-restaurants.getTopRatedRestaurants();
+// Remove a food item from the order
+restaurantManager.removeFoodFromOrder(2); // Remove Burger
 
-// Displays all restaurants within the specified rating range
-restaurants.getRestaurantsByRating(4.0, 4.5);
 
-// Deletes restaurants from the database
-restaurants.deleteRestaurant("Sushi Central");
-restaurants.deleteRestaurant("Krusty Krab");
+
+// Clear the order
+restaurantManager.clearOrder(); // Output: Order cleared.
+
+// Recalculate total order cost
+restaurantManager.calculateTotal(); 
+
 ```
